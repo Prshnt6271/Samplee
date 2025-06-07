@@ -6,11 +6,12 @@ const Animation = () => {
   const canvasRef = useRef(null);
 
   // Base color sets that will mix together
-  const colorSets = [
-    ['#a960ee', '#ff333d', '#90e0ff', '#ffcb57'],
-    ['#7928ca', '#ff0080', '#00d1ff', '#ffd166'],
-    ['#833ab4', '#fd1d1d', '#fcb045', '#4bc0c0']
-  ];
+const colorSets = [
+  ['#fefefe', '#36261c', '#fcb81c'],
+  ['#fefefd', '#37271b', '#40251b'],
+  ['#246a73', '#fdfefe', '#fab71a'],
+  ['#fab91d', '#cb4457', '#55787d']
+];
 
   useEffect(() => {
     const canvas = canvasRef.current;
