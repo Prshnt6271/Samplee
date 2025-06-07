@@ -55,15 +55,17 @@
 /* 🔧 Responsive for Mobile */
 @media (max-width: 768px) {
   .iphone-image {
-    height: 45vh;
+    height: 35vh; /* Reduced from 45vh to 35vh */
+    top: 20%; /* Adjusted position to compensate for smaller size */
+    left: 70%; /* Slightly more centered */
   }
 
   .gradient-content {
-    top: 18%; /* optional: move slightly up */
+    top: 15%;
   }
 
   .gradient-content h1 {
-    font-size: clamp(1rem, 4.5vw, 1.5rem); /* ✅ Smaller text on phone */
+    font-size: clamp(1rem, 4.5vw, 1.5rem);
     line-height: 1.1;
   }
 }
