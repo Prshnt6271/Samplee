@@ -1,0 +1,69 @@
+.gradient-container-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: white;
+}
+
+.gradient-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.Gradient__canvas {
+  width: 100%;
+  height: 100%;
+  filter: blur(1px);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 70%);
+}
+
+.gradient-content {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  z-index: 2;
+  color: white;
+  width: 90%;
+}
+
+.gradient-content h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+}
+
+/* 🔧 Image Styling */
+.iphone-image {
+  position: absolute;
+  top: 15%;
+  left: 74%;
+  transform: translateX(-50%);
+  height: 70vh;
+  z-index: 2;
+  object-fit: contain;
+}
+
+/* 🔧 Responsive for Mobile */
+@media (max-width: 768px) {
+  .iphone-image {
+    height: 45vh;
+  }
+
+  .gradient-content {
+    top: 18%; /* optional: move slightly up */
+  }
+
+  .gradient-content h1 {
+    font-size: clamp(1rem, 4.5vw, 1.5rem); /* ✅ Smaller text on phone */
+    line-height: 1.1;
+  }
+}
