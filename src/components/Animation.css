@@ -44,28 +44,27 @@
 /* 🔧 Image Styling */
 .iphone-image {
   position: absolute;
-  top: 15%;
+  top: -10%;
   left: 74%;
   transform: translateX(-50%);
-  height: 70vh;
+  height: 85vh;
   z-index: 2;
   object-fit: contain;
 }
 
-/* 🔧 Responsive for Mobile */
+/* 📱 Mobile Responsive Fix */
 @media (max-width: 768px) {
   .iphone-image {
-    height: 35vh; /* Reduced from 45vh to 35vh */
-    top: 20%; /* Adjusted position to compensate for smaller size */
-    left: 70%; /* Slightly more centered */
+    left: 50%;          /* Center the image horizontally */
+    height: 54vh;        /* Reduce height on smaller screens */
+    top: 4%;             /* Adjust vertical spacing */
   }
 
   .gradient-content {
-    top: 15%;
+    top: 10%;
   }
 
   .gradient-content h1 {
-    font-size: clamp(1rem, 4.5vw, 1.5rem);
-    line-height: 1.1;
+    font-size: clamp(1.2rem, 5vw, 2.5rem);
   }
 }

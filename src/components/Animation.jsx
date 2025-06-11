@@ -1,18 +1,25 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Animation.css';
-import iphone from '../assets/iphone.jpg'; // Adjust the path if needed
+
+import img1 from '../assets/1.png';
+import img2 from '../assets/2.png';
+import img3 from '../assets/3.png';
+
+const images = [img1, img2, img3];
 
 const Animation = () => {
   const canvasRef = useRef(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Base color sets that will mix together
-const colorSets = [
-  ['#fefefe', '#36261c', '#fcb81c'],
-  ['#fefefd', '#37271b', '#40251b'],
-  ['#246a73', '#fdfefe', '#fab71a'],
-  ['#fab91d', '#cb4457', '#55787d']
-];
+  // Cycle images every 3s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
+  // Canvas wave animation (unchanged)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -23,12 +30,13 @@ const colorSets = [
     let colorMixProgress = 0;
     let currentSetIndex = 0;
     let nextSetIndex = 1;
-    let currentColors = [...colorSets[0]];
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 0.6;
-    };
+    const colorSets = [
+      ['#fefefe', '#36261c', '#fcb81c'],
+      ['#fefefd', '#37271b', '#40251b'],
+      ['#246a73', '#fdfefe', '#fab71a'],
+      ['#fab91d', '#cb4457', '#55787d']
+    ];
 
     const mixColors = (color1, color2, amount) => {
       const [r1, g1, b1] = color1.match(/\w\w/g).map(c => parseInt(c, 16));
@@ -37,6 +45,11 @@ const colorSets = [
       const g = Math.round(g1 + (g2 - g1) * amount).toString(16).padStart(2, '0');
       const b = Math.round(b1 + (b2 - b1) * amount).toString(16).padStart(2, '0');
       return `#${r}${g}${b}`;
+    };
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.6;
     };
 
     const drawWave = () => {
@@ -49,7 +62,7 @@ const colorSets = [
         nextSetIndex = (nextSetIndex + 1) % colorSets.length;
       }
 
-      currentColors = colorSets[currentSetIndex].map((color, i) =>
+      const currentColors = colorSets[currentSetIndex].map((color, i) =>
         mixColors(color, colorSets[nextSetIndex][i], colorMixProgress)
       );
 
@@ -63,7 +76,6 @@ const colorSets = [
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Wave drawing
       ctx.beginPath();
       const amplitude = 40;
       const wavelength = 200;
@@ -85,17 +97,13 @@ const colorSets = [
       animationFrameId = requestAnimationFrame(drawWave);
     };
 
-    const init = () => {
-      resizeCanvas();
-      drawWave();
-    };
-
-    init();
-    window.addEventListener('resize', init);
+    resizeCanvas();
+    drawWave();
+    window.addEventListener('resize', resizeCanvas);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('resize', init);
+      window.removeEventListener('resize', resizeCanvas);
     };
   }, []);
 
@@ -109,7 +117,11 @@ const colorSets = [
           <h1>Designers, Construction, etc</h1>
         </div>
       </div>
-      <img src={iphone} alt="iPhone" className="iphone-image" />
+      <img
+        src={images[currentImageIndex]}
+        alt="Rotating Showcase"
+        className="iphone-image fade"
+      />
     </div>
   );
 };
