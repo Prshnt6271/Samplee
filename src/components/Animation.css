@@ -56,7 +56,7 @@
 @media (max-width: 768px) {
   .iphone-image {
     left: 50%;          /* Center the image horizontally */
-    height: 54vh;        /* Reduce height on smaller screens */
+    height: 40vh;        /* Reduce height on smaller screens */
     top: 4%;             /* Adjust vertical spacing */
   }
 
